@@ -1,45 +1,49 @@
-Overview
-========
+# 🧮 Airflow Math Operations DAG
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+This project demonstrates a simple Apache Airflow DAG that performs a sequence of basic mathematical operations using `PythonOperator`.
 
-Project Contents
-================
+## 📌 Overview
 
-Your Astro project contains the following files and folders:
+The DAG consists of 5 tasks executed in sequence:
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+1. **Start Number** – Initializes the value to `10`.
+2. **Add Five** – Adds 5 to the initial number.
+3. **Multiply by Two** – Multiplies the result by 2.
+4. **Subtract Three** – Subtracts 3 from the new value.
+5. **Complete Square** – Squares the final result.
 
-Deploy Your Project Locally
-===========================
+Each task passes its result to the next using **XComs**, showcasing how data can flow between tasks in Airflow.
 
-Start Airflow on your local machine by running 'astro dev start'.
+## 🚀 Getting Started
 
-This command will spin up five Docker containers on your machine, each for a different Airflow component:
+1. Ensure you have Airflow installed and initialized.
+2. Copy the DAG file (`mlpipeline.py`) into your Airflow `dags/` directory.
+3. Start the Airflow scheduler and webserver:
+   ```bash
+   airflow scheduler
+   airflow webserver
 
-- Postgres: Airflow's Metadata Database
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- DAG Processor: The Airflow component responsible for parsing DAGs
-- API Server: The Airflow component responsible for serving the Airflow UI and API
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+4. Trigger the DAG manually or let it run on its defined schedule (@daily).
 
-When all five containers are ready the command will open the browser to the Airflow UI at http://localhost:8080/. You should also be able to access your Postgres Database at 'localhost:5432/postgres' with username 'postgres' and password 'postgres'.
+### 🛠 Requirements
+    Python 3.7+
 
-Note: If you already have either of the above ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+    Apache Airflow 2.x or 3.x
 
-Deploy Your Project to Astronomer
-=================================
+📌 Note: Remove provide_context=True if you're on Airflow 2+ or later — context is passed automatically.
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
+### 📂 Project Structure
+    .
+    ├── dags/
+    │   └── mlpipeline.py
+    ├── README.md
 
-Contact
-=======
+### 📖 Concepts Illustrated
+* Task orchestration using Airflow
 
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+* Data passing with XComs
+
+* Use of PythonOperator
+
+* DAG scheduling and dependencies
+
