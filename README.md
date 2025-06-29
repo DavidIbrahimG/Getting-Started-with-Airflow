@@ -33,10 +33,25 @@ Each task passes its result to the next using **XComs**, showcasing how data can
 📌 Note: Remove provide_context=True if you're on Airflow 2+ or later — context is passed automatically.
 
 ### 📂 Project Structure
-    .
+    airflowastro/
     ├── dags/
-    │   └── mlpipeline.py
+    │   ├── __pycache__/
+    │   ├── exampledag.py
+    │   ├── maths_operation.py
+    │   ├── mlpipeline.py
+    │   └── taskflowapi.py
+    ├── include/
+    ├── plugins/
+    ├── tests/
+    ├── .airflowignore
+    ├── .dockerignore
+    ├── .env
+    ├── .gitignore
+    ├── airflow_settings.yaml
+    ├── Dockerfile
+    ├── packages.txt
     ├── README.md
+    └── requirements.txt
 
 ### 📖 Concepts Illustrated
 * Task orchestration using Airflow
